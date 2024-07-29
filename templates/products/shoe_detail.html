@@ -1,0 +1,78 @@
+{% extends "base.html" %}
+
+{% block title %}
+{{ shoe.name }} - Shoe Detail
+{% endblock %}
+
+{% block content %}
+<h1 style="color: #4CAF50;">{{ shoe.name }}</h1>
+<div style="width: 800px; height: 200px; border: 4px solid #4CAF50;margin:0 auto;display: flex;flex-direction: row;border-radius: 10px;">
+    <div style="width: 200px;height: 200px;">
+        <img src="{{ shoe.image.url }}" alt="{{ shoe.name }}" style="width:200px;height: 200px;">
+    </div>
+    <div style="width: 600px;height: 200px;display:flex;flex-direction: row;background-color: #4CAF50;">
+        <div style="width: 200px;text-align: justify;color: white;margin: 0 10px ;">
+            <p>Category: {{ shoe.category }}</p>
+            <p>Type: {{ shoe.type }}</p>
+            <p>Made Company: {{ shoe.made_company }}</p>
+            <p>Made Country: {{ shoe.made_country }}</p>
+            <p>Color: {{ shoe.color }}</p>
+        </div>
+        <div style="width: 200px;text-align: justify;color: white;margin: 0 10px ;">
+            <p>Size: {{ shoe.size }}</p>
+            <p>Price: {{ shoe.price }}</p>
+            <p>Lather: {{ shoe.lather }}</p>
+            <p>Season: {{ shoe.season }}</p>
+        </div>
+        <div style="width: 200px;text-align: justify;color: white;margin: 0 10px ;">
+            <h2>Reviews</h2>
+            <a href="{% url 'products:add_review' shoe.pk %}" style="color: white;">Add Review</a>
+        </div>
+    </div>
+</div>
+
+
+{% for review in reviews %}
+<div class="review" style="width: 800px;border: 4px solid #4CAF50;margin: 20px auto;background-color: #4CAF50;border-radius: 10px;">
+    <h4 style="color: white;"><b style="color: grey;">Usernmae:</b>{{ review.user.username }} <b style="color: #4CAF50;">12345</b> <b style="color: grey;">Rating:</b> {{ review.rating }} <b style="color: #4CAF50;">webbb</b><b style="color: grey;">Comment:</b>{{ review.comment }}</h4>
+    {% if user.is_authenticated and review.user == user %}
+    <div style="width:220px;display:  flex;flex-direction: row;margin: 0 auto;">
+        <div style="width: 110px;">
+            <form method="post" action="{% url 'products:delete_review' review.pk %}">
+                {% csrf_token %}
+                <button type="submit" style="border: 2px solid white;background-color: #4CAF50;color: white; border-radius:5px;">Delete</button>
+            </form>
+        </div>
+       <div style="width: 110px;">
+           <button style="border: 2px solid white;background-color: #4CAF50;color: white; border-radius:5px;"><a href="{% url 'products:update_review' review.pk  %}" style="color: white;text-decoration: none;">Update</a></button>
+       </div>
+    </div>
+    
+    {% endif %}
+</div>
+{% empty %}
+<p class="no-reviews">No reviews yet.</p>
+{% endfor %}
+
+
+<h2 style="color: #4CAF50;">Recommended Shoes</h2>
+<div class="recommended-shoes"  style="width: 600px;display: grid;grid-template-columns: 
+                                       auto auto auto;grid-gap:10px;padding: 10px;margin: 0 auto;">
+    {% for recommended_shoe in recommended_shoes %}
+    <div class="shoe" style="background-color: #4CAF50;border: 1px solid none;border-radius: 5px;
+                             padding: 20px;font-size: 30px;text-align: center;">
+        <a href="{% url 'products:shoe_detail' recommended_shoe.pk %}" style="text-decoration: none;">
+            <img src="{{ recommended_shoe.image.url }}" alt="{{ recommended_shoe.name }}" style="width: 100%; height: 170px;border-radius: 5px;">
+            <p style="color:white;font-size:large;">{{ recommended_shoe.name }}</p>
+        </a>
+        <p style="color:white;font-size:large;">Price: {{ recommended_shoe.price }} </p>
+    </div>
+    {% empty %}
+    <p>No recommended shoes available.</p>
+    {% endfor %}
+</div>
+
+
+{% endblock %}
+
+

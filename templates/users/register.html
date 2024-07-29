@@ -1,0 +1,45 @@
+{% extends "base.html" %}
+{% load crispy_forms_tags %}
+
+{% block title %}Register{% endblock %}
+
+{% block content %}
+    <style>
+        form {
+            margin: 20px 0;
+        }
+
+        form button {
+            width: 100px;
+            height: 25px;
+            background-color: #4CAF50; /* Green background */
+            color: white; /* White text */
+            border: none; /* Remove borders */
+            border-radius: 4px; /* Rounded corners */
+            cursor: pointer; /* Pointer/hand icon */
+        }
+
+        form button:hover {
+            background-color: #45a049; /* Darker green on hover */
+        }
+
+        form p {
+            margin-top: 20px;
+        }
+
+        .form-container {
+            width: 50%; /* Center the form with a width */
+            margin: 0 auto;
+        }
+    </style>
+
+    <div class="form-container">
+        <h2>Register</h2>
+        <form method="POST">
+            {% csrf_token %}
+            {{ form|crispy }}
+            <button type="submit">Register</button>
+        </form>
+        <p>Already have an account? <a href="{% url 'users:login' %}">Login here</a></p>
+    </div>
+{% endblock %}

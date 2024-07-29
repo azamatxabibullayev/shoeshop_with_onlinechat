@@ -1,0 +1,43 @@
+{% extends "base.html" %}
+
+{% block title %}
+Search "{{ query }}"
+{% endblock %}
+
+{% block content %}
+<h1 style="font-size: 30px; font-family: cursive">Search results for "{{ query }}"</h1>
+
+<div class="search-results">
+    <h2 style="font-size: 30px; font-family: cursive">Shoes</h2>
+    <div class="shoes-results">
+        {% for shoe in shoes_results %}
+        <div class="shoe-result">
+            <a href="{% url 'products:shoe_detail' shoe.pk %}">
+                <img src="{{ shoe.image.url }}" alt="{{ shoe.name }}" style="width: 150px; height: auto;">
+                <p style="font-size: 15px; font-family: cursive">{{ shoe.name }}</p>
+            </a>
+            <p style="font-size: 15px; font-family: cursive">Price: {{ shoe.price }}</p>
+        </div>
+        {% endfor %}
+        {% if not shoes_results %}
+        <p style="font-size: 15px; font-family: cursive">No results.</p>
+        {% endif %}
+    </div>
+
+    <h2>Users</h2>
+    <div class="users-results">
+        {% for user in users_results %}
+        <div class="user-result">
+            <a href="{% url 'users:profile' user.pk %}">
+                <p>{{ user.username }}</p>
+            </a>
+        </div>
+        {% endfor %}
+        {% if not users_results %}
+        <p>No results.</p>
+        {% endif %}
+    </div>
+</div>
+
+{% endblock %}
+

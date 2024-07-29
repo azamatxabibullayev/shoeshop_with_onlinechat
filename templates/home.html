@@ -1,0 +1,40 @@
+{% extends "base.html" %}
+
+{% block title %}Home{% endblock %}
+
+{% block content %}
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css" integrity="sha512-SnH5WK+bZxgPHs44uWIX+LLJAJ9/2PkPKZ5QiAj6Ta86w+fsb2TkcmfRyVX3pBnMFcV7oQPJkl9QevSCWr3W6A==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+
+<body style="width: 100%; height: 100vh;">
+    <div class="container" style="display: flex;align-items: center;justify-content: center; width: 100%;height: 100%;">
+        <div class="img_container" style="width: 45%">
+            <img src="/media/picture2.png" alt="krasofkalar rasmi" class="img" style="width: 100%">
+        </div>
+        <div class="text_container"style="width: 45%; display: flex; align-items: center;justify-content: center; font-family: cursive; font-size: 20px">
+            <p>
+                Har Qadamda Qulaylik! Yangi kolleksiyamizni kashf eting: Zamonaviy Dizaynlar Yuqori Sifatli Materiallar
+                Eng Yaxshi Narxlar Qulaylik va uslub bir joyda! Sizga mos eng yaxshi oyoq kiyimlar shu yerda. Bugun tashrif buyuring va o'zingizga mosini toping!
+            </p>
+        </div>
+    </div>
+    <footer style="width: 100%; height: 200px; background-color: forestgreen; display: flex; align-items: center; justify-content: space-around">
+        <div style="width: 20%;height: 20%; display:flex; align-items: center; justify-content: center">
+            <i class="fa-brands fa-youtube"style="font-size: 25px;color: red"></i>
+            <a href="https://www.youtube.com/"style="font-size: 20px;text-decoration: none">YouTube</a>
+        </div>
+        <div style="width: 20%;height: 20%;  display:flex; align-items: center; justify-content: center">
+            <i class="fa-brands fa-instagram"style="color: purple; font-size: 25px"></i>
+            <a href="https://www.instagram.com/" style="font-size: 20px;text-decoration: none">Instagram</a>
+        </div>
+        <div style="width: 20%;height: 20%;  display:flex; align-items: center; justify-content: center">
+            <i class="fa-brands fa-facebook" style="font-size: 25px;  color: blue"></i>
+            <a href="https://www.facebook.com/"style="font-size: 20px;text-decoration: none">Facebook</a>
+        </div>
+        <div style="width: 20%;height: 20% ;display:flex; align-items: center; justify-content: center">
+            <i class="fa-brands fa-github" style="font-size: 25px; color: black"></i>
+            <a href="https://github.com/"style="font-size: 20px;text-decoration: none">GitHub</a>
+        </div>
+
+    </footer>
+</body>
+{% endblock %}

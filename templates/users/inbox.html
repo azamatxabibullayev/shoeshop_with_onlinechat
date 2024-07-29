@@ -1,0 +1,55 @@
+{% block content %}
+<h2>Inbox</h2>
+{% if chat_messages %}
+    {% for sender, messages in chat_messages.items %}
+        <div class="chat" id="chat-{{ sender.username }}"style="font-family:cursive;">
+            <h3>{{ sender.username }}</h3>
+            <div class="messages">
+                {% for message in messages %}
+                    <p><strong>{% if message.sender == request.user %}You{% else %}{{ message.sender.username }}{% endif %}:</strong> {{ message.content }}</p>
+                {% endfor %}
+            </div>
+            <form class="send-message-form" method="post" data-recipient="{{ sender.username }}">
+                {% csrf_token %}
+                {{ form.as_p }}
+                <input type="hidden" name="recipient_username" value="{{ sender.username }}">
+                <button type="submit"style="width: 120px; height: 35px; border-radius: 20px; background-color: #4CAF50; border: none">Send</button>
+                <button  type="submit"style="width: 120px; height: 35px; border-radius: 20px; background-color: #4CAF50; border: none"><a href="{% url 'users:home'  %}">Back</a></button>
+            </form>
+        </div>
+    {% endfor %}
+{% else %}
+    <p>No messages</p>
+{% endif %}
+{% endblock %}
+
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<script>
+$(document).ready(function() {
+    $('.send-message-form').on('submit', function(event) {
+        event.preventDefault();
+        var form = $(this);
+        $.ajax({
+            url: "{% url 'users:inbox' %}",
+            type: 'POST',
+            data: form.serialize(),
+            success: function(data) {
+                if (data.status === 'success') {
+                    var newMessage = '<p><strong>You:</strong> ' + data.message + '</p>';
+                    form.closest('.chat').find('.messages').append(newMessage);
+                    form[0].reset();
+                } else {
+                    console.log(data.errors);
+                }
+            }
+        });
+    });
+});
+</script>
+
+
+
+
+
+
+

@@ -1,0 +1,13 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<div>
+    <h2 style="font-family: cursive; font-size: 30px">Delete Shoe</h2>
+    <p>Are you sure you want to delete the shoe "{{ object.name }}"?</p>
+    <form method="post">
+        {% csrf_token %}
+        <button type="submit"style="width: 120px; height: 35px; border-radius: 20px; background-color: #4CAF50; border: none;">Delete</button>
+        <a href="{% url 'shoes_detail' pk=object.pk %}" class="btn btn-secondary">Cancel</a>
+    </form>
+</div>
+{% endblock %}

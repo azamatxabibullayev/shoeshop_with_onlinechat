@@ -1,0 +1,20 @@
+<!--{% extends "base.html" %}-->
+
+<!--{% block title %}My Paintings{% endblock %}-->
+
+<!--{% block content %}-->
+<!--<h2>My Paintings</h2>-->
+<!--{% if paintings %}-->
+<!--<ul>-->
+<!--    {% for painting in paintings %}-->
+<!--    <li>-->
+<!--        <h3>{{ painting.title }}</h3>-->
+<!--        <img src="{{ painting.image.url }}" alt="{{ painting.title }}" style="max-width: 300px;">-->
+<!--    </li>-->
+<!--    {% endfor %}-->
+<!--</ul>-->
+<!--{% else %}-->
+<!--<p>You have not uploaded any paintings yet.</p>-->
+<!--{% endif %}-->
+<!--<a href="{% url 'users:upload_painting' %}">Upload a new painting</a>-->
+<!--{% endblock %}-->

@@ -1,0 +1,14 @@
+{% extends 'base.html' %}
+
+{% block title %}
+Filter Shoes
+{% endblock %}
+
+{% block content %}
+<h1>Filter Shoes</h1>
+<form method="GET" action="{% url 'products:filter' %}">
+    {% csrf_token %}
+    {{ filter_form.as_p }}
+    <button type="submit"style="width: 120px; height: 35px; border-radius: 20px; background-color: #4CAF50; border: none;">Filter</button>
+</form>
+{% endblock %}

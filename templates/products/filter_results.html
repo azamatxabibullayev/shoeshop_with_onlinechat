@@ -1,0 +1,18 @@
+{% extends 'base.html' %}
+
+{% block title %}
+Filtered Shoes
+{% endblock %}
+
+{% block content %}
+<h1 style="font-size: 30px; font-family: cursive">Filtered Shoes</h1>
+{% if shoes %}
+<ul>
+    {% for shoe in shoes %}
+    <li><a href="{% url 'products:shoe_detail' pk=shoe.pk %}">{{ shoe.name }}</a> - {{ shoe.price }}</li>
+    {% endfor %}
+</ul>
+{% else %}
+<p style="font-size: 15px; font-family: cursive">No shoes found matching the filter criteria.</p>
+{% endif %}
+{% endblock %}

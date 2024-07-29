@@ -1,0 +1,34 @@
+{% extends "base.html" %}
+{% block title %}All Shoes{% endblock %}
+
+{% block content %}
+<h1 style="color:#4CAF50 ;">All Shoes</h1>
+
+<a href="{% url 'products:createshoe' %}" class="btn btn-primary" style="text-decoration: none; color: #4CAF50;">Create New Shoe</a>
+
+{% if shoes %}
+<div style="width: 1000px;display: grid;grid-template-columns: 
+            240px 240px 240px 240px;grid-gap:10px;
+            padding: 10px;margin: 0 auto;">
+    {% for shoe in shoes %}
+    <div style="background-color: #4CAF50;
+                border: 1px solid none;border-radius: 5px;
+                padding: 20px;font-size: 30px;
+                text-align: center;">
+            <img src="{{ shoe.image.url }}" alt="{{ shoe.name }}" style="width: 100%; height: 170px;border-radius: 5px;">
+            <a href="{% url 'products:shoe_detail' shoe.pk %}" style="text-decoration: none; color:white; cursor: pointer;font-size:large;">{{ shoe.name }}</a>
+    </div>
+    {% endfor %}
+</div>
+{% else %}
+<p>No shoes available.</p>
+{% endif %}
+
+<h1>{{ category.name }}</h1>
+<ul>
+    {% for category in categories %}
+    <a href="{% url 'products:shoes_by_category' category.pk %}">{{ category.name }}</a>
+    {% endfor %}
+</ul>
+
+{% endblock %}
